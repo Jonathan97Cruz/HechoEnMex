@@ -77,6 +77,7 @@ $conexion = conexion();
                                     <td>Contacto</td>
                                     <td>Teléfono</td>
                                     <td>Seguimiento</td>
+                                    <td>Actual</td>
                                 </tr>
                             </thead>
                             <?php
@@ -90,11 +91,17 @@ $conexion = conexion();
                                         <td><?php echo $contacto = $a['contacto']; ?></td>
                                         <td><?php echo $telefo = $a['telefono']; ?></td>
                                         <td>
-                                            <form action="segui/seguimi.php" method="POST">
+                                            <form action="segui/seg.php" method="POST">
                                                 <input type="hidden" name="idSe" id="idSe" value="<?php echo $idS = $a['idR']; ?>">
                                                 <center><button class="btn btn-primary">
                                                 <i class="fa fa-folder-open" aria-hidden="true"></i>
                                                 </button></center>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="segui/seguimi.php" method="POST">
+                                                <input type="hidden" name="idSe" value="<?php echo $idS = $a['idR']; ?>">
+                                                <center><button class="btn btn-success"><i class="fa fa-folder-open" aria-hidden="true"></i></button></center>
                                             </form>
                                         </td>
                                 </tbody>

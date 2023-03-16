@@ -694,201 +694,179 @@ $idS = $_POST['idSe'];
                     <br>
                 </div><!--Fin de tabla 1-->
                 <div class="row">
-                    <?php 
-                        $que = mysqli_query($conexion,"SELECT * FROM evcomp WHERE idEmp = '$idS'"); 
-                        $qu = mysqli_num_rows($que);
-                        if($qu > 0){
-                            echo ' <h4 style="text-align: center; color:white;" class="bg-dark "><i class="fa-sharp fa-solid fa-boxes-stacked"></i> Evidencia de compra de materia prima</h4> ';
-                            echo ' <table class="table" id="eviComp"> <tr class="table-dark">';
-                            echo ' <th style="text-align: center"><i class="fa-sharp fa-solid fa-box"></i> Materia prima</th>
-                                            <th style="text-align: center"><i class="fas fa-file-signature"></i> Factura</th>
-                                            <th style="text-align: center"><i class="fa-sharp fa-solid fa-boxes-packing"></i> Proveedor</th>
-                                            <th style="text-align: center"><i class="fa-sharp fa-solid fa-envelope-open-text"></i> Carta</th>
-                                            <th style="text-align: center"><i class="fa-sharp fa-solid fa-boxes-packing"></i> Proveedor</th>
-                                            <th style="text-align: center"><i class="fa-sharp fa-solid fa-arrows-to-eye"></i> Observaciones</th>
-                                        </tr>
-                                    
-                                     
-                                       
-                            ';
-                            while($a = mysqli_fetch_array($que)){
-                                $registros = $a['matPri'];
-                                $fact = $a['fact'];
-                                $provee = $a['provee'];
-                                $carta = $a['carta'];
-                                $proved = $a['proveed'];
-                                $obs = $a['obs'];
-                                echo ' <tr>
-                                            <td>
-                                                <div class="col-md-12">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <textarea name="mtu[]" rows="1" class="form-control">'.$registros.'</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>  
-                                            <td><!--Factura-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <select name="ftu[]" id="ftu" class="form-select" value="'.$fact.'">
-                                                                <option value="Selecciona una opción">Selecciona una opción</option>
-                                                                <option value="Entregado">Entregado</option>
-                                                                <option value="Falta">Falta</option>
-                                                                <option value="NA">NA</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><!--Proveedor 1-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <textarea name="pvu[]" id="pvu" rows="1" class="form-control">'.$provee.'</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><!--Carta-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <select name="ctu[]" id="ctu" class="form-select" value="'.$carta.'">
-                                                                <option value="Selecciona una opción">Selecciona una opción</option>
-                                                                <option value="Entregado">Entregado</option>
-                                                                <option value="Falta">Falta</option>
-                                                                <option value="NA">NA</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><!--Proveedor 2-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <textarea name="pou[]" id="pou" rows="1" class="form-control">'.$proved.'</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><!--Observaciones-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <textarea name="obu[]" id="obu" rows="1" class="form-control">'.$obs.'</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            </tr>
-                                        ';
-                            }
-                            echo '
-                                </table>
-                            ';
-                        }else{
-                            echo "No se encontraron registros";
-                        }
-                    ?>
+                    <h4 style="text-align: center; color:white;" class="bg-dark "><i class="fa-sharp fa-solid fa-boxes-stacked"></i> Evidencia de compra de materia prima</h4>
+                    <table class="table" id="eviComp">
+                        <thead class="thead-dark">
+                            <tr class="table-dark">
+                                <th style="text-align: center"><i class="fa-sharp fa-solid fa-box"></i> Materia prima</th>
+                                <th style="text-align: center"><i class="fas fa-file-signature"></i> Factura</th>
+                                <th style="text-align: center"><i class="fa-sharp fa-solid fa-boxes-packing"></i> Proveedor</th>
+                                <th style="text-align: center"><i class="fa-sharp fa-solid fa-envelope-open-text"></i> Carta</th>
+                                <th style="text-align: center"><i class="fa-sharp fa-solid fa-boxes-packing"></i> Proveedor</th>
+                                <th style="text-align: center"><i class="fa-sharp fa-solid fa-arrows-to-eye"></i> Observaciones</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr>
+                                <td><!--Materia prima-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea name="mtu[]" id="mtu" rows="1" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><!--Factura-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <select name="ftu[]" id="ftu" class="form-select">
+                                                    <option value="Selecciona una opción">Selecciona una opción</option>
+                                                    <option value="Entregado">Entregado</option>
+                                                    <option value="Falta">Falta</option>
+                                                    <option value="NA">NA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><!--Proveedor 1-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea name="pvu[]" id="pvu" rows="1" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><!--Carta-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <select name="ctu[]" id="ctu" class="form-select">
+                                                    <option value="Selecciona una opción">Selecciona una opción</option>
+                                                    <option value="Entregado">Entregado</option>
+                                                    <option value="Falta">Falta</option>
+                                                    <option value="NA">NA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><!--Proveedor 2-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea name="pou[]" id="pou" rows="1" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><!--Observaciones-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea name="obu[]" id="obu" rows="1" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table><!--Fin de la tabla-->
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                            <button id="addBtnEvide" type="button" class="btn btn-success"><i class="fas fa-plus-circle"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div><br>
                 <div class="row">
-                    <?php
-                        $rev = mysqli_query($conexion,"SELECT * FROM reproto WHERE idEmp = '$idS' ");
-                        $revv = mysqli_num_rows($rev);
-                        if($revv > 0){
-                            echo '
-                            <h4 style="text-align: center; color:white;" class="bg-dark "><i class="fa-sharp fa-solid fa-user-magnifying-glass"></i> Revisión de prototipos</h4>
-                            <table class="table" id="revprot">
-                                <tr class="table-dark">
-                                    <th style="text-align: center;"><i class="fa-sharp fa-solid fa-list-check"></i> Producto</th>
-                                    <th style="text-align: center;"><i class="fa-sharp fa-solid fa-location-dot"></i> Lugar de uso</th>
-                                    <th style="text-align: center;"><i class="fa-sharp fa-solid fa-ruler-combined"></i> Ancho de prototipo (cm)</th>
-                                    <th style="text-align: center;"><i class="fa-sharp fa-solid fa-ruler-combined"></i> Medida Actual de logotipo (cm)</th>
-                                    <th style="text-align: center;"><i class="fa-sharp fa-solid fa-ruler-combined"></i> Medida correcta de logotipo (cm)</th>
-                                    <th style="text-align: center;"><i class="fa-sharp fa-solid fa-arrows-to-eye"></i> Observaciones</th>
-                                </tr>
-                            ';
-                            while($b = mysqli_fetch_array($rev)){
-                                $prod = $b['prod'];
-                                $lugar = $b['lugar'];
-                                $ancho = $b['ancho'];
-                                $medAct = $b['medAct'];
-                                $medCor = $b['medCor'];
-                                $obs = $b['obs'];
-                                echo '
-                                <tr>
-                                    <td>
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <textarea name="rpu[]" id="rpu[]" rows="1" class="form-control">'.$prod.'</textarea>
-                                                </div>
+                    <h4 style="text-align: center; color:white;" class="bg-dark "><i class="fa-sharp fa-solid fa-user-magnifying-glass"></i> Revisión de prototipos</h4>
+                    <table class="table" id="revprot">
+                        <thead class="thead-dark">
+                            <tr class="table-dark">
+                                <th style="text-align: center;"><i class="fa-sharp fa-solid fa-list-check"></i> Producto</th>
+                                <th style="text-align: center;"><i class="fa-sharp fa-solid fa-location-dot"></i> Lugar de uso</th>
+                                <th style="text-align: center;"><i class="fa-sharp fa-solid fa-ruler-combined"></i> Ancho de prototipo (cm)</th>
+                                <th style="text-align: center;"><i class="fa-sharp fa-solid fa-ruler-combined"></i> Medida Actual de logotipo (cm)</th>
+                                <th style="text-align: center;"><i class="fa-sharp fa-solid fa-ruler-combined"></i> Medida correcta de logotipo (cm)</th>
+                                <th style="text-align: center;"><i class="fa-sharp fa-solid fa-arrows-to-eye"></i> Observaciones</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea name="rpu[]" id="rpu[]" rows="1" class="form-control" placeholder="Maximo '' caracteres"></textarea>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td><!--lugar de uso-->
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <select name="rlu[]" id="rlu[]" class="form-select" value="'.$lugar.'">
-                                                        <option value="Selecciona una opción">Selecciona una opción</option>
-                                                        <option value="Caja">Caja</option>
-                                                        <option value="Etiqueta">Etiqueta</option>
-                                                        <option value="Empaque">Empaque</option>
-                                                        <option value="Costal">Costal</option>
-                                                        <option value="Otro">Otro</option>
-                                                    </select>
-                                                </div>
+                                    </div>
+                                </td>
+                                <td><!--lugar de uso-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <select name="rlu[]" id="rlu[]" class="form-select">
+                                                    <option value="Selecciona una opción">Selecciona una opción</option>
+                                                    <option value="Caja">Caja</option>
+                                                    <option value="Etiqueta">Etiqueta</option>
+                                                    <option value="Empaque">Empaque</option>
+                                                    <option value="Costal">Costal</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td><!--Ancho prototipo-->
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <input id="rau[]" name="rau[]" type="number" class="form-control" step="0.01" value="'.$ancho.'">
-                                                </div>
+                                    </div>
+                                </td>
+                                <td><!--Ancho prototipo-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <input id="rau[]" name="rau[]" type="number" class="form-control" step="0.01">
                                             </div>
                                         </div>
-                                    </td>
-                                    <td><!--Medida actual-->
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <input id="rmu[]" name="rmu[]" type="number" class="form-control" step="0.01" value="'.$medAct.'">
-                                                </div>
+                                    </div>
+                                </td>
+                                <td><!--Medida actual-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <input id="rmu[]" name="rmu[]" type="number" class="form-control" step="0.01">
                                             </div>
                                         </div>
-                                    </td>
-                                    <td><!--Medida correcta-->
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <input id="rlu[]" name="rlu[]" type="number" class="form-control" step="0.01" value="'.$medCor.'">
-                                                </div>
+                                    </div>
+                                </td>
+                                <td><!--Medida correcta-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <input id="rlu[]" name="rlu[]" type="number" class="form-control" step="0.01">
                                             </div>
                                         </div>
-                                    </td>
-                                    <td><!--Observaciones-->
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <textarea name="rou[]" id="rou[]" rows="1" class="form-control">'.$obs.'</textarea>
-                                                </div>
+                                    </div>
+                                </td>
+                                <td><!--Observaciones-->
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <textarea name="rou[]" id="rou[]" rows="1" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                                ';
-                            }
-                            echo '
-                            </table>
-                            ';
-                        }
-                    ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-success" id="btnRevProt"><i class="fas fa-plus-circle"></i> Agregar</button>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
